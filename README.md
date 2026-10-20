@@ -15,9 +15,11 @@ Onda Player is a lightweight, free, and open-source Android music player designe
 - 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/home.png" alt="Onda Player home screen" width="250">
-  <img src="screenshots/player.png" alt="Onda Player music player" width="250">
-  <img src="screenshots/settings.png" alt="Onda Player settings" width="250">
+  <img src="screenshots/1.jpg" alt="Onda Player Screenshot 1" width="250">
+  <img src="screenshots/2.jpg" alt="Onda Player Screenshot 2" width="250">
+  <img src="screenshots/3.jpg" alt="Onda Player Screenshot 3" width="250">
+  <img src="screenshots/4.jpg" alt="Onda Player Screenshot 4" width="250">
+  <img src="screenshots/5.jpg" alt="Onda Player Screenshot 5" width="250">
 </p>
 
 📲 Installation
