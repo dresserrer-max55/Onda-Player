@@ -1,4 +1,4 @@
-🎵 Onda Player — Free, Open-Source Music Player for Android
+# 🎵 Onda Player — Free, Open-Source Music Player for Android
 
 Onda Player is a lightweight, free, and open-source Android music player designed to provide a smooth, private, and ad-free listening experience. Enjoy your favorite local audio files with a clean, intuitive interface and no unnecessary distractions.
 
