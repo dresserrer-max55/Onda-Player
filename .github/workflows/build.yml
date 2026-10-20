@@ -1,0 +1,63 @@
+name: Compilar APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Busca la carpeta del proyecto (donde está gradlew), aunque hayas subido
+      # las carpetas sueltas dentro de otra carpeta del repositorio.
+      - name: Detectar proyecto
+        id: proj
+        run: |
+          G=$(find . -name gradlew -not -path './.git/*' | head -n 1)
+          if [ -z "$G" ]; then
+            echo "No se encontró el archivo gradlew. Sube TODO el contenido del proyecto (incluida la carpeta gradle/)."
+            exit 1
+          fi
+          DIR=$(dirname "$G")
+          echo "dir=$DIR" >> "$GITHUB_OUTPUT"
+          echo "Proyecto en: $DIR"
+
+      # Lee el README (LEEME.md / README.md) y lo muestra en el resumen de la ejecución.
+      - name: Leer README
+        run: |
+          DIR="${{ steps.proj.outputs.dir }}"
+          F=$(find "$DIR" . -maxdepth 1 -type f \( -iname 'README*' -o -iname 'LEEME*' \) 2>/dev/null | head -n 1)
+          if [ -n "$F" ]; then
+            echo "=== $F ==="
+            cat "$F"
+            { echo "## $(basename "$F")"; echo; cat "$F"; } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No hay README/LEEME en el proyecto."
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Al subir archivos sueltos por la web, GitHub pierde el permiso de ejecución.
+      - name: Dar permiso a gradlew
+        run: chmod +x "${{ steps.proj.outputs.dir }}/gradlew"
+
+      - name: Compilar
+        working-directory: ${{ steps.proj.outputs.dir }}
+        run: ./gradlew assembleDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Onda-APK
+          path: ${{ steps.proj.outputs.dir }}/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
