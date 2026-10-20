@@ -12,7 +12,7 @@ Onda Player is a lightweight, free, and open-source Android music player designe
 - 📁 Multiple Audio Formats: Support for formats such as MP3, WAV, FLAC, AAC, and OGG, depending on the implemented playback libraries.
 - 🆓 Free and Open Source: The source code is publicly available for anyone to inspect, learn from, modify, and redistribute under the terms of the MIT License.
 
-- 📸 Screenshots
+# 📸 Screenshots
 
 <p align="center">
   <img src="screenshots/1.jpg" alt="Onda Player Screenshot 1" width="250">
